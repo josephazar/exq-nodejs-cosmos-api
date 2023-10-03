@@ -35,4 +35,10 @@ local.settings.json
 
 # Ignore build directory
 dist
+./notes.txt
 notes.txt
+./comments.txt 
+comments.txt
+
+
+
