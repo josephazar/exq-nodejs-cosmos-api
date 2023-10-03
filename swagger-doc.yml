@@ -1,0 +1,150 @@
+openapi: '3.0.0'
+info:
+  version: '1'
+  title: 'QnA Language API'
+  description: 'API for NodeJS + CosmosDB/MongoDB with QnA data.'
+servers:
+  - url: 'http://localhost:3000/api/v1'  # Adjust the server URL as needed
+components:
+  securitySchemes:
+    BearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   # optional, only if you use JWT for tokens
+security:
+  - BearerAuth: []        # apply the BearerAuth security scheme globally
+paths:
+  /qna/init:
+    post:
+      summary: Initialize MongoDB with QnA data (should be executed only one time at the beginning)
+      tags:
+        - QnA Language
+      responses:
+        '200':
+          description: MongoDB has been successfully initialized and returns the inserted QnA data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:   # The structure of QnA data, you need to adjust it according to your actual data structure
+                    question:
+                      type: string
+                    answer:
+                      type: string
+                    department:
+                      type: string
+                    category:
+                      type: string
+        '500':
+          description: Internal Server Error occurred while initializing MongoDB
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /qna/knowledgebase:
+    get:
+      summary: Retrieve all questions and answers from the knowledge base
+      tags:
+        - QnA Language
+      security:
+        - BearerAuth: [] 
+      responses:
+        '200':
+          description: Successful retrieval of the QnA list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique ID of the QnA item
+                    questions:
+                      type: string
+                      description: The question text
+                    answer:
+                      type: string
+                      description: The answer text
+                    department:
+                      type: string
+                      description: The department to which the QnA belongs
+                    category:
+                      type: string
+                      description: The category of the QnA within the department
+        '500':
+          description: Internal Server Error occurred while retrieving the QnA list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    post:
+      summary: Add a new question and answer to the knowledge base
+      tags:
+        - QnA Language
+      security:
+        - BearerAuth: [] 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question to be added
+                answer:
+                  type: string
+                  description: The answer to the provided question
+                department:
+                  type: string
+                  description: The department related to the question
+                category:
+                  type: string
+                  description: The category of the question within the department
+      responses:
+        '200':
+          description: Question and answer added successfully
+        '500':
+          description: Internal server error
+  /qna/knowledgebase/{id}:
+    delete:
+      summary: Delete a question and answer from the knowledge base
+      security:
+        - BearerAuth: [] 
+      tags:
+        - QnA Language
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the question to delete
+      responses:
+        '200':
+          description: Question and answer deleted successfully or not found
+        '500':
+          description: Internal server error
+  /qna/knowledgebase/deploy:
+    post:
+      summary: Deploy the updated knowledge base
+      security:
+        - BearerAuth: [] 
+      tags:
+        - QnA Language
+      responses:
+        '200':
+          description: Knowledge base deployed successfully
+        '500':
+          description: Internal server error

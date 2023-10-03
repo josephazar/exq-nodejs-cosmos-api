@@ -1,0 +1,38 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+
+data/kb_init.json
+
+# Environment Files
+.env
+
+# Editor folders and files
+.idea/
+*.sublime*
+*.swp
+*.swo
+*.swn
+*.code-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Azure generated
+local.settings.json
+
+# Ignore log files
+*.log
+
+# Ignore the next build directory
+.next
+
+# Ignore build directory
+dist
+notes.txt

@@ -1,0 +1,15 @@
+nvm use 18
+npm install mongodb dotenv
+npx express-generator . --view ejs
+mkdir controllers
+mkdir models
+mkdir data
+touch routes/qnalanguage.router.js 
+touch controllers/qnalanguage.controller.js
+npm i swagger-ui-express 
+touch swagger-doc.yml
+npm i yamljs
+npm i jsonwebtoken
+mkdir middlewares
+touch middlewares/verifyRequests.js
+DEBUG=ceer-api-js:* npm start 

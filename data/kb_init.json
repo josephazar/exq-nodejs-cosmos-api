@@ -1,0 +1,308 @@
+[
+    {
+        "question": "What is the company's dress code for female employees?",
+        "answer": "Female employees should wear an \"Abaya\" or Business Attire.",
+        "department": "HR",
+        "category": "Dress Code"
+    },
+    {
+        "question": "What is the company's dress code for male employees?",
+        "answer": "Male employees should wear a \"Thob\" or Business Attire, with or without a necktie.",
+        "department": "HR",
+        "category": "Dress Code"
+    },
+    {
+        "question": "Is there a casual dress day at the company?",
+        "answer": "\"Casual Thursday\" is the one day of the week when any employee can wear non-formal clothing, such as jeans and a polo shirt. However, the clothing should not be distracting or offensive to others or the wider culture and society.",
+        "department": "HR",
+        "category": "Dress Code"
+    },
+    {
+        "question": "What clothing is considered appropriate for Casual Thursday?",
+        "answer": "Business casual jeans, polo and normal shirts, blouses, and sneakers are acceptable.",
+        "department": "HR",
+        "category": "Dress Code"
+    },
+    {
+        "question": "What clothing should be avoided on Casual Thursday?",
+        "answer": "Employees should avoid sportswear and activewear, beachwear, Bermuda and shorts, sleeveless tops or t-shirts, flip flops, ripped jeans, and tattered sneakers.",
+        "department": "HR",
+        "category": "Dress Code"
+    },
+    {
+        "question": "Where can employees view all holiday dates?",
+        "answer": "Employees can view all holiday dates on the Masar portal.",
+        "department": "HR",
+        "category": "Holidays"
+    },
+    {
+        "question": "When will the dates for the two Eid holidays be confirmed?",
+        "answer": "The two Eid holidays dates are tentative and will be confirmed in the week prior based on the sighting of the moon. Confirmed dates for the first Eid (Eid Al-Fitr) will be shared during Ramadan.",
+        "department": "HR",
+        "category": "Holidays"
+    },
+    {
+        "question": "How do employees access the Masar HR Portal?",
+        "answer": "Masar supports Single Sign-On (SSO) authentication. Employees can access it by using the link: [Masar HR Portal](https://hcm23.sapsf.com/login?company=3Dceernation) and bookmark it on their web browser.",
+        "department": "HR",
+        "category": "Holidays"
+    },
+    {
+        "question": "What should employees do if they face any issues with the Masar portal?",
+        "answer": "Employees facing any issues should raise a ticket on the ITSM portal at [ITSM Portal](https://itsm.ceermotors.com/MSMSelfService).",
+        "department": "HR",
+        "category": "Holidays"
+    },
+    {
+        "question": "How were the Club Leaders of the Ceer Sport and Social clubs selected?",
+        "answer": "The Club Leaders were selected by the majority of club members through a vote.",
+        "department": "HR",
+        "category" : "Clubs"
+    },
+    {
+        "question": "What should employees do if they missed the survey window for club membership?",
+        "answer": "Employees who missed the survey window can reach out to the club leader directly at any time of the year to join the clubs.",
+        "department": "HR",
+        "category" : "Clubs"
+    },
+    {
+        "question": "How will future new joiners be informed about the clubs?",
+        "answer": "The information about the clubs and how to join them will be shared with future new joiners on their first day to keep the clubs active.",
+        "department": "HR",
+        "category" : "Clubs"
+    },
+    {
+        "question": "What is the new development in the HR services?",
+        "answer": "The Expense Management module of SAP Concur has been launched to integrate and automate HR services.",
+        "department": "HR",
+        "category" : "SAP Concur"
+    },
+    {
+        "question": "What benefits does SAP Concur offer to the organization?",
+        "answer": "SAP Concur improves compliance, manages spending, and reduces the complexity of the expense management process.",
+        "department": "HR",
+        "category" : "SAP Concur"
+    },
+    {
+        "question": "How does Concur Expense benefit employees?",
+        "answer": "Concur Expense allows employees to submit their expenses seamlessly and supports the company in reimbursing the employees more quickly and efficiently.",
+        "department": "HR",
+        "category" : "SAP Concur"
+    },
+    {
+        "question": "How can employees access SAP Concur?",
+        "answer": "Concur supports Single Sign-On (SSO) authentication. Employees can access it using the following link: [SAP Concur Portal](https://eu2.concursolutions.com/home.asp) and bookmark it on their web browser.",
+        "department": "HR",
+        "category" : "SAP Concur"
+    },
+    {
+        "question": "How do I get to Masar?",
+        "answer": "https://hcm23.sapsf.com/login?company=ceernation#/login",
+        "department": "HR",
+        "category": "Portal Access"
+    },
+    {
+        "question": "What is the company ID in Masar?",
+        "answer": "It's ceernation. Please make sure it's one word with only small letters.",
+        "department": "HR",
+        "category": "Portal Access"
+    },
+    {
+        "question": "How do I get to ITSM?",
+        "answer": "https://ceer.marval.cloud/MSMauthenticationSAML2/?ReturnUrl=https%3a%2f%2fitsm.ceermotors.com%3a443%2fMSMSelfService%2fLogin.aspx%3fReturnUrl%3d%252fMSMSelfService%252fIndex.aspx%26CapIdentifier%3dhttps%253a%252f%252fceer.marval.cloud%252fMSMauthenticationSAML2%252f",
+        "department": "IT",
+        "category": "Portal Access"
+    },
+    {
+        "question": "When will I receive my PC",
+        "answer": "PC's are deployed based on the order you arrived in the Kingdom and when stock is available.",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "I have a mobile and want to connect to wifi",
+        "answer": "All Mobile Phones personal tables should connect to Guest_Wifi. The Password is Ceer@2022",
+        "department": "IT",
+        "category": "Networking"
+    },
+    {
+        "question": "I have a BYOD laptop and want to connect to wifi",
+        "answer": "For a BYOD (Bring your own Device) you can connect it to BYOD_Wifi. To do this contact IT and they will connect your BYOD device to the correct network.",
+        "department": "IT",
+        "category": "Networking"
+    },
+    {
+        "question": "How do I get access to sharepoint",
+        "answer": "All Ceer employees should be able to access Ceer Sharepoint. The link is https://ceerev.sharepoint.com/sites/Ceermotors. If you get access denied, contact IT to check your account.",
+        "department": "IT",
+        "category": "Portal Access"
+    },
+    {
+        "question": "How do I share a file",
+        "answer": "You can share files either by SharePoint/OneDrive or attach the documents to an email. However, it depends on whether the recipient is inside or outside the organization.",
+        "department": "IT",
+        "category": "File Management"
+    },
+    {
+        "question": "What is the maxium attachment size",
+        "answer": "The maximum attachment size in Ceer email (outgoing and receiving) is 20Mb",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "How do I create a distribution list",
+        "answer": "Raise a request with IT via ITSM",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "How do I create a shared mailbox",
+        "answer": "Raise a request with IT via ITSM",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "How do I access a shared mailbox",
+        "answer": "Shared Mailboxes that you have access to will appear in Outlook on the left hand side down below your Outlook folders. If you do not see anything there then you do not have access to a Shared Mailbox",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "My monitor doesn't work",
+        "answer": "Raise a request with IT via ITSM and someone will help correct the issue",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "my docking station doesn't work",
+        "answer": "Raise a request with IT via ITSM and someone will help correct the issue",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "How do I get a headphone",
+        "answer": "Raise a request with IT via ITSM",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "My PIF email is not working",
+        "answer": "Raise a request with IT via ITSM and someone will help correct the issue",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "how do I sign a pdf",
+        "answer": "review the documentation on the link: https://ceerev.sharepoint.com/:w:/s/SecurityTestTeam/EXPWzCIWR-NBi5_FRPoRl40Bl-H1yABpTmONPjtTdu6xYw?e=eBh4M4",
+        "department": "IT",
+        "category": "File Management"
+    },
+    {
+        "question": "I can't open a file",
+        "answer": "check out the Troubleshooting steps in the document at: https://ceerev.sharepoint.com/:w:/s/SecurityTestTeam/EaHkvmJHt_dDgkTK8sgcCVgBIdxfOMpaGhiqXhK1M-qMPw?e=ahEe08",
+        "department": "IT",
+        "category": "File Management"
+    },
+    {
+        "question": "I sent a file to a third party and they can't open it",
+        "answer": "Make sure you label the document as External Confidential, so the third party can open the document.",
+        "department": "IT",
+        "category": "File Management"
+    },
+    {
+        "question": "How do I report a phishing email",
+        "answer": "Press the \"Report Phish\" button on the top right of your Outlook menu",
+        "department": "IT",
+        "category": "Security"
+    },
+    {
+        "question": "How do I install a new software",
+        "answer": "Raise a request with IT via ITSM",
+        "department": "IT",
+        "category": "Software"
+    },
+    {
+        "question": "I can't download from sharepoint",
+        "answer": "To download from CEER SharePoint your device must be a company device, or you must use Office VDI",
+        "department": "IT",
+        "category": "Portal Access"
+    },
+    {
+        "question": "what are the Ceer password requirements",
+        "answer": "Minimum 10 characters, with at least 1 capital letter, at least 1 special character. Plus password must not be on a global \"not good password list\"",
+        "department": "IT",
+        "category": "Security"
+    },
+    {
+        "question": "what is the IT help desk email",
+        "answer": "itsm@ceermotors.com",
+        "department": "IT",
+        "category": "Support"
+    },
+    {
+        "question": "what is the cyber security team email",
+        "answer": "soc@ceermotors.com",
+        "department": "IT",
+        "category": "Security"
+    },
+    {
+        "question": "my laptop screen is broke what do I do",
+        "answer": "Raise a request with IT via ITSM and someone will help",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "I want use a mac",
+        "answer": "We only support Windows PC's in the Ceer Environment to allow us to manage, deploy software and security updates",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "My laptop was stolen or lost, what do I do",
+        "answer": "You need to make a Police report and then report the loss with IT",
+        "department": "IT",
+        "category": "Security"
+    },
+    {
+        "question": "I can't upload to filevalt from vdi",
+        "answer": "you can't upload to FileVault in the VDI unless you are a member of the Data management group",
+        "department": "IT",
+        "category": "Data Management"
+    },
+    {
+        "question": "my data classification labels don't show up in office",
+        "answer": "In some cases, you may face this issue, however, Office App depends on a Signed-in user account to download all the needed configurations for the labels. Make sure you are using a company laptop, and you are logged in by your company account in Office App.",
+        "department": "IT",
+        "category": "Software"
+    },
+    {
+        "question": "What data classification label do I use",
+        "answer": "It depends on the type of information the document contains. For example, if you want to share the document with an external party you must label the document as External Confidential",
+        "department": "IT",
+        "category": "Data Management"
+    },
+    {
+        "question": "I am not receiving email from a particular party",
+        "answer": "Please check your Junk mail and Quarantine folder. If you can't find the email, please raise a ticket in Marvel.",
+        "department": "IT",
+        "category": "Email"
+    },
+    {
+        "question": "my usb is not working",
+        "answer": "USB use for storing and retrieving files is blocked by default on all Ceer PC's",
+        "department": "IT",
+        "category": "Hardware"
+    },
+    {
+        "question": "How do I access SAP Concur Employee Expense Management",
+        "answer": "https://eu2.concursolutions.com/",
+        "department": "HR",
+        "category": "SAP Concur"
+    },
+    {
+        "question": "How do I access Fiori",
+        "answer": "https://fiori.ceermotors.com",
+        "department": "IT",
+        "category": "Portal Access"
+    }
+]
