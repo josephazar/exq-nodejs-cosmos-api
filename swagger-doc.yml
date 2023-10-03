@@ -3,8 +3,8 @@ info:
   version: '1'
   title: 'QnA Language API'
   description: 'API for NodeJS + CosmosDB/MongoDB with QnA data.'
-servers:
-  - url: 'http://localhost:3000/api/v1'  # Adjust the server URL as needed
+#servers:
+#  - url: 'http://localhost:3000/api/v1'  # Adjust the server URL as needed
 components:
   securitySchemes:
     BearerAuth:            # arbitrary name for the security scheme
