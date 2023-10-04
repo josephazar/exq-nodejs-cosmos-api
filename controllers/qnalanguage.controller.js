@@ -1,6 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const {MongoClient, ObjectId} = require('mongodb');
+const axios = require('axios');
 const url = process.env.COSMOS_CONNECTION_STRING;
 const dbname = process.env.COSMOS_DB_NAME;
 
