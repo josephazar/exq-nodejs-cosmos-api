@@ -14,7 +14,7 @@ require('dotenv').config();
 var qnaRouter = require('./routes/qnalanguage.router');
 const swaggerDocument = YAML.load('./swagger-doc.yml');
 swaggerDocument.servers = [{
-  url: `${process.env.API_SERVER_URL}`
+  url: `${process.env.API_SERVER_URL_LOCAL}`
 }];
 
 var app = express();

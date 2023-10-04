@@ -76,23 +76,25 @@ exports.chatbotqaUpdateSource = async function(req, res) {
   req.setTimeout(600000); // 10 minutes
   console.log("Source URI:", process.env.AZURE_FAQ_SOURCE_URI);
   const refreshData = [
-    {
-        "op": "replace",
-        "value": {
-            "displayName": process.env.AZURE_FAQ_SOURCE_NAME,
-            "sourceKind": "url",
-            "sourceUri": process.env.AZURE_FAQ_SOURCE_URI,
-            "source": process.env.AZURE_FAQ_SOURCE_URI,
-            "refresh": "true"
+        {
+            "op": "replace",
+            "value": {
+                "displayName": process.env.AZURE_FAQ_SOURCE_NAME,
+                "sourceKind": "url",
+                "sourceUri": process.env.AZURE_FAQ_SOURCE_URI,
+                "source": process.env.AZURE_FAQ_SOURCE_URI,
+                "refresh": "true"
+            }
         }
-    }
-];
+    ];
     console.log(refreshData);
+    let refreshUrl = `${process.env.LANGUAGE_ENDPOINT}language/query-knowledgebases/projects/${process.env.LANGUAGE_PROJECT}/sources?api-version=2021-10-01`;
+    console.log(refreshUrl);
     await axios({
         method: 'patch',
-        url: `${process.env.LANGUAGE_ENDPOINT}language/query-knowledgebases/projects/${process.env.LANGUAGE_PROJECT}/sources?api-version=2021-10-01`,
+        url: refreshUrl,
         headers: {
-            'Ocp-Apim-Subscription-Key': process.env.Ocp_Apim_Subscription_Key,
+            'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
             'Content-Type': 'application/json'
         },
         data: refreshData
@@ -107,22 +109,26 @@ exports.chatbotqaUpdateSource = async function(req, res) {
         }
         console.log(error.message)
         console.log('Request Failed');
+        return res.status(500).json({ message: "Internal Server Error" });
     });
     // Update the knowledge base
     await delay(3000); // Delay in seconds
     // If soruce url refresh succeeded, then deploy
-    let response = await axios({
-        method: 'put',
-        url: `${process.env.LANGUAGE_ENDPOINT}language/query-knowledgebases/projects/${process.env.LANGUAGE_PROJECT}/deployments/production?api-version=2021-10-01`,
-        headers: {
-            'Ocp-Apim-Subscription-Key': process.env.Ocp_Apim_Subscription_Key,
-            'Content-Type': 'application/json'
-        },
-    });
-    res.status(200).json({ message: "Question and answer added and knowledge base deployed" });
+    try {
+        let response = await axios({
+            method: 'put',
+            url: `${process.env.LANGUAGE_ENDPOINT}language/query-knowledgebases/projects/${process.env.LANGUAGE_PROJECT}/deployments/production?api-version=2021-10-01`,
+            headers: {
+                'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
+                'Content-Type': 'application/json'
+            },
+        });
+        return res.status(200).json({ message: "Question and answer added and knowledge base deployed" });
+    }catch (error) {    
+        console.log(error.message)
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
 }
-
-
  exports.getQNA = async function(req, res) {
     const client = new MongoClient(url);
     try {
