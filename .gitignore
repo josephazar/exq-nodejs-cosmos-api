@@ -2,7 +2,7 @@
 node_modules/
 npm-debug.log
 
-data/kb_init.json
+#data/kb_init.json
 
 # Environment Files
 .env
