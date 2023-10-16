@@ -214,9 +214,9 @@ exports.chatbotqaUpdateSource = async function(req, res) {
 
         // Append to HTML
         sortedByDepartment.forEach(dep => {
-            html += `<h1>${dep.name}</h1>`;
+            //html += `<h1>${dep.name}</h1>`;
             dep.categories.forEach(cat => {
-                html += `<h2>${cat.name}</h2>`;
+                html += `<h1>${dep.name} - ${cat.name}</h1>`;
                 cat.questions.forEach(q => {
                     html += `<h3>${q.question}</h3><p>${q.answer}</p>`;
                 });
