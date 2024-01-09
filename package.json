@@ -18,6 +18,9 @@
     "mongodb": "^6.1.0",
     "morgan": "~1.9.1",
     "swagger-ui-express": "^5.0.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "@azure/identity": "^4.0.0",
+    "@azure/openai": "^1.0.0-beta.7",
+    "openai": "^4.20.1"
   }
 }

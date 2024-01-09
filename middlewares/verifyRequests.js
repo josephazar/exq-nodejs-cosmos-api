@@ -3,7 +3,8 @@ const apiBearerToken = process.env.API_BEARER;
 module.exports =  (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    //console.log(token);
+    console.log("authHeader")
+    console.log(authHeader);
     if (token == null) 
         return res.sendStatus(401); // if there is no token in the request, return Unauthorized
 

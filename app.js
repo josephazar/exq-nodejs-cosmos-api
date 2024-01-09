@@ -11,6 +11,7 @@ require('dotenv').config();
 
 //var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
+const botRouter = require('./routes/bot');
 var qnaRouter = require('./routes/qnalanguage.router');
 const swaggerDocument = YAML.load('./swagger-doc.yml');
 swaggerDocument.servers = [{
@@ -33,6 +34,7 @@ app.use(cookieParser());
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use("/api/v1/qna",qnaRouter)
+app.use("/api/v1/bot",botRouter)
 
 // Use Swagger with your Express App
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
