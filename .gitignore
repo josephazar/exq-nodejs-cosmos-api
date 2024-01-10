@@ -34,7 +34,7 @@ local.settings.json
 .next
 
 # Ignore build directory
-dist
+#dist
 ./notes.txt
 notes.txt
 ./comments.txt 
