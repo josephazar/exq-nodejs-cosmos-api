@@ -54,5 +54,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
+//////////////////////////added for angular
+app.use(express.static(__dirname + '/dist'));
 
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname + '/dist/index.html');
+});
+//////////////////////added for angular
 module.exports = app;
