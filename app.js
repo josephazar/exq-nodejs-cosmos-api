@@ -31,6 +31,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
+
+//////////////////////////added for angular
+app.use(express.static(__dirname + '/dist'));
+
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname + '/dist/test-angular/browser/index.html');
+  // console.log(__dirname + '/dist/test-angular/browser/index.html')
+});
+//////////////////////added for angular
+
+
+
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use("/api/v1/qna",qnaRouter)
@@ -54,11 +66,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
-//////////////////////////added for angular
-app.use(express.static(__dirname + '/dist'));
 
-app.get('/*', function(req, res) {
-  res.sendFile(__dirname + '/dist/index.html');
-});
-//////////////////////added for angular
 module.exports = app;
