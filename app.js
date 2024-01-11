@@ -35,7 +35,7 @@ app.use(cookieParser());
 //////////////////////////added for angular
 app.use(express.static(__dirname + '/dist/test-angular/browser/'));
 
-app.get('/*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/dist/test-angular/browser/index.html');
   // console.log(__dirname + '/dist/test-angular/browser/index.html')
 });
