@@ -97,7 +97,8 @@ function roomReport(name,schedule,datetime){
     
 
     
-    let sched=`you are a AI summarizer that help to give when the room is available based on the meetings , check if this room ${name} is available at this date ${datetime} ,the room is not available at this times due to meetings: `
+    let sched=`if the first meeting begin time is less than the specified endtime say it's available before first meeting.
+    you are a AI summarizer that help to give when the room is available based on the meetings , check if this room ${name} is available at this date ${datetime}, check if the room is available before and after meetings time,  the room has meetings :`
     let counter=1
     for(const item of schedule){
 
@@ -119,7 +120,8 @@ function roomReport(name,schedule,datetime){
 
 
 function roomReportTemp(name,schedule,begin,begintime,endtime){
-    let sched=`you are a AI summarizer that help to give when the room is available based on the meetings , check if this room ${name} is available between  in this date ${begin} and from this time${begintime} to this time ${endtime} , the room is not available at this times due to meetings :`
+    let sched=`if the first meeting begin time is less than the specified endtime say it's available before first meeting.
+    you are a AI summarizer that help to give when the room is available based on the meetings , check if this room ${name} is available between in this date ${begin} and from this time${begintime} to this time ${endtime}  , check if the room is available before and after meetings time,  the room has meetings :`
     let counter=1
     for(const item of schedule){
 

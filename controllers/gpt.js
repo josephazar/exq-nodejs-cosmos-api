@@ -105,8 +105,8 @@ async function report(prompt){
   const deploymentName = "ex-turbo-instruct";
 
   const { choices } = await client.getCompletions(deploymentName, textToSummarize, {
-    maxTokens: 1000,
-    Temperature:1,
+    maxTokens: 4000,
+    Temperature:0,
     topP:0,
   });
   const completion = choices[0].text;
