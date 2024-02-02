@@ -10,7 +10,7 @@ const BearerStrategy = require('passport-azure-ad').BearerStrategy;
 
 
 var languageController = require('../controllers/qnalanguage.controller');
-router.get('/knowledgebase', languageController.getQNA);
+
 
 const options = {
     // https://login.microsoftonline.com/<your_tenant_guid>/.well-known/openid-configuration
@@ -85,6 +85,7 @@ router.delete('/knowledgebase/:id', languageController.chatbotqaDelete);
 router.post('/knowledgebase/deploy', languageController.chatbotqaUpdateSource);
 router.post('/init', languageController.initMongoDbQNA);
 router.put('/knowledgebase',languageController.chatbotqaUpdate)
+router.get('/knowledgebase', languageController.getQNA);
 router.get('/protected',(req, res) => {
     res.send({'res':'Hello! This resource is protected.'})
 }

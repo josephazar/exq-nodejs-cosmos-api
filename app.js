@@ -67,8 +67,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
-// const port=8000
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
+
 module.exports = app;
