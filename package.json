@@ -21,6 +21,8 @@
     "yamljs": "^0.3.0",
     "@azure/identity": "^4.0.0",
     "@azure/openai": "^1.0.0-beta.7",
-    "openai": "^4.20.1"
+    "openai": "^4.20.1",
+    "passport": "^0.7.0",
+    "passport-azure-ad": "^4.3.5"
   }
 }

@@ -1,0 +1,20 @@
+{
+    "credentials": {
+      "tenantID": "151a3694-1e2f-4a7f-bf26-102adc3fcc10",
+      "clientID": "b3867ad9-6844-457b-83b2-2bade94c68e4",
+      "audience": "api://b3867ad9-6844-457b-83b2-2bade94c68e4"
+    },
+    "resource": {
+      "scope": ["general"]
+    },
+    "metadata": {
+      "authority": "sts.windows.net",
+      "discovery": ".well-known/openid-configuration",
+      "version": "v2.0"
+    },
+    "settings": {
+      "validateIssuer": false,
+      "passReqToCallback": false,
+      "loggingLevel": "error"
+    }
+  }

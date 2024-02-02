@@ -234,3 +234,40 @@ exports.chatbotqaUpdateSource = async function(req, res) {
         await client.close();
     }
  };
+
+ exports.chatbotqaUpdate = async (req, res) => {
+    const client = new MongoClient(url);
+    try {
+        const { id, question, answer, department, category } = req.body;
+        if (!id) {
+            res.status(400).json({ success: false, message: 'ID is required' });
+            return;
+        }
+        await client.connect();
+        const db = client.db(dbname);
+        const collection = db.collection('questionsanswers');
+
+        const result = await collection.updateOne(
+            { _id: new ObjectId(id) },
+            {
+                $set: {
+                    question,
+                    answer,
+                    department,
+                    category
+                }
+            }
+        );
+
+        if (result.matchedCount === 1) {
+            res.json({ success: true, message: 'Document successfully updated!' });
+        } else {
+            res.json({ success: false, message: 'No document found with the provided ID.' });
+        }
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false });
+    } finally {
+        await client.close();
+    }
+};

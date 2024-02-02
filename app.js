@@ -13,6 +13,7 @@ require('dotenv').config();
 //var usersRouter = require('./routes/users');
 const botRouter = require('./routes/bot');
 var qnaRouter = require('./routes/qnalanguage.router');
+var frontrouter=require('./routes/frontauth')
 const swaggerDocument = YAML.load('./swagger-doc.yml');
 swaggerDocument.servers = [{
   url: `${process.env.API_SERVER_URL_LOCAL}`
@@ -47,7 +48,7 @@ app.get('/', function(req, res) {
 //app.use('/users', usersRouter);
 app.use("/api/v1/qna",qnaRouter)
 app.use("/api/v1/bot",botRouter)
-
+app.use("/api/v1/auth",frontrouter)
 // Use Swagger with your Express App
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -66,5 +67,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
-
+const port=8000
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 module.exports = app;
