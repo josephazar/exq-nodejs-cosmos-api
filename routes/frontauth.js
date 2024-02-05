@@ -83,7 +83,9 @@ router.get('/source', languageController.getQnAHtml);
 router.post('/knowledgebase', languageController.chatbotqaAdd);
 router.delete('/knowledgebase/:id', languageController.chatbotqaDelete);
 router.post('/knowledgebase/deploy', languageController.chatbotqaUpdateSource);
+
 router.post('/init', languageController.initMongoDbQNA);
+
 router.put('/knowledgebase',languageController.chatbotqaUpdate)
 router.get('/knowledgebase', languageController.getQNA);
 router.get('/protected',(req, res) => {

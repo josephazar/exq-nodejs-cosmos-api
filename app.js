@@ -34,10 +34,10 @@ app.use(cookieParser());
 
 
 //////////////////////////added for angular
-app.use(express.static(__dirname + '/dist/test-angular/browser/'));
+app.use(express.static(__dirname + '/dist/app'));
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/dist/test-angular/browser/index.html');
+  res.sendFile(__dirname + '/dist/app/index.html');
   // console.log(__dirname + '/dist/test-angular/browser/index.html')
 });
 //////////////////////added for angular
@@ -67,5 +67,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
-
+const port=8000
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 module.exports = app;

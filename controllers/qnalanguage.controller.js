@@ -166,6 +166,18 @@ exports.chatbotqaUpdateSource = async function(req, res) {
         const documents = JSON.parse(fs.readFileSync('./data/kb_init.json', 'utf8'));
         await collection.insertMany(documents);
         console.log("Inserted documents into the collection");
+
+       
+        const unansweredCollection = db.collection('unansweredquestions');
+        console.log(`Connected correctly to collection ${unansweredCollection.collectionName}`);
+        const existingUnansweredCollectionCount = await unansweredCollection.countDocuments();
+        if (existingUnansweredCollectionCount === 0) {
+            console.log("Creating 'unansweredquestions' collection");
+            await unansweredCollection.createIndex({ question: 1 }, { unique: true });
+        }
+
+
+
         const questions = await collection.find().toArray();
         res.json(questions);
     } catch (err) {

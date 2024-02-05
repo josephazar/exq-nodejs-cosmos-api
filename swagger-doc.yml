@@ -17,8 +17,8 @@ paths:
   /qna/init:
     post:
       summary: Initialize MongoDB with QnA data (should be executed only one time at the beginning)
-      tags:
-        - QnA Language
+      tags: 
+      - Configuration  # Updated tag for initialization under the 'Configuration' section
       responses:
         '200':
           description: MongoDB has been successfully initialized and returns the inserted QnA data
@@ -46,6 +46,9 @@ paths:
                 properties:
                   error:
                     type: string
+
+
+
   /qna/knowledgebase:
     get:
       summary: Retrieve all questions and answers from the knowledge base
@@ -117,6 +120,7 @@ paths:
           description: Question and answer added successfully
         '500':
           description: Internal server error
+
   /qna/knowledgebase/{id}:
     delete:
       summary: Delete a question and answer from the knowledge base
@@ -136,13 +140,14 @@ paths:
           description: Question and answer deleted successfully or not found
         '500':
           description: Internal server error
+
   /qna/knowledgebase/deploy:
     post:
       summary: Deploy the updated knowledge base
       security:
         - BearerAuth: [] 
       tags:
-        - QnA Language
+        - Configuration
       responses:
         '200':
           description: Knowledge base deployed successfully
