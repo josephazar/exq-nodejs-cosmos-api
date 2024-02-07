@@ -47,6 +47,39 @@ paths:
                   error:
                     type: string
 
+    /qna/init:
+    post:
+      summary: Initialize MongoDB with QnA data (should be executed only one time at the beginning)
+      tags: 
+      - Configuration  # Updated tag for initialization under the 'Configuration' section
+      responses:
+        '200':
+          description: MongoDB has been successfully initialized and returns the inserted QnA data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:   # The structure of QnA data, you need to adjust it according to your actual data structure
+                    question:
+                      type: string
+                    answer:
+                      type: string
+                    department:
+                      type: string
+                    category:
+                      type: string
+        '500':
+          description: Internal Server Error occurred while initializing MongoDB
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
 
 
   /qna/knowledgebase:

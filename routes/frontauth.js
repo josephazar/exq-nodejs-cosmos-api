@@ -22,8 +22,8 @@ const options = {
      * issuer: `https://${azureConfig.metadata.authority}/${azureConfig.credentials.tenantID}/${azureConfig.metadata.version}`,
      */
     // @ts-ignore
-    issuer: null,
-
+    // issuer: null,
+    issuer: `https://${azureConfig.metadata.authority}/${azureConfig.credentials.tenantID}/${azureConfig.metadata.version}`,
     validateIssuer: azureConfig.settings.validateIssuer,
 
     clientID: azureConfig.credentials.clientID,
@@ -73,25 +73,40 @@ passport.use(bearerStrategy);
 router.use(passport.initialize());
 
 router.use(passport.authenticate('oauth-bearer', { session: false }), (req, res, next) => {
-    // console.log('req.authInfo', req.authInfo);
+    console.log('req.authInfo', req.authInfo);
     res.locals.authInfo = req.authInfo;
     return next();
 });
 
 
 router.get('/source', languageController.getQnAHtml);
-router.post('/knowledgebase', languageController.chatbotqaAdd);
-router.delete('/knowledgebase/:id', languageController.chatbotqaDelete);
-router.post('/knowledgebase/deploy', languageController.chatbotqaUpdateSource);
+router.post('/knowledgebase',isAdmin, languageController.chatbotqaAdd);
+router.delete('/knowledgebase/:id',isAdmin, languageController.chatbotqaDelete);
+router.post('/knowledgebase/deploy',isAdmin, languageController.chatbotqaUpdateSource);
 
-router.post('/init', languageController.initMongoDbQNA);
+router.post('/init',isAdmin, languageController.initMongoDbQNA);
 
-router.put('/knowledgebase',languageController.chatbotqaUpdate)
+router.put('/knowledgebase',isAdmin,languageController.chatbotqaUpdate)
 router.get('/knowledgebase', languageController.getQNA);
 router.get('/protected',(req, res) => {
     res.send({'res':'Hello! This resource is protected.'})
 }
 )
+
+
+
+
+function isAdmin(req, res, next) {
+    const roles = req.authInfo.roles || [];
+
+    // Check if the user has the admin role
+    if (roles.includes('admin')) {
+        return next();
+    } else {
+        return res.status(403).json({ error: 'Forbidden: Admin role required' });
+    }
+}
+
 
 module.exports = router;
 

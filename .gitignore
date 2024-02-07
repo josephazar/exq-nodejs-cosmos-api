@@ -1,6 +1,7 @@
 # Node.js dependencies
 node_modules/
 npm-debug.log
+backup/
 
 #data/kb_init.json
 
