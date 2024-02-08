@@ -31,7 +31,7 @@ function delay(time) {
             department: department,
             category: category
         });
-      res.status(200).json({ message: "Question and answer added successfully." });
+      res.status(200).json({ message: "Question and answer added successfully." ,id:result.insertedId});
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
@@ -129,22 +129,37 @@ exports.chatbotqaUpdateSource = async function(req, res) {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
- exports.getQNA = async function(req, res) {
+
+
+exports.getQNA = async function(req, res) {
     const client = new MongoClient(url);
     try {
         await client.connect();
         const db = client.db(dbname);
         const collection = db.collection('questionsanswers');
+
+        // Fetch unique values for department and category
+        const uniqueDepartments = await collection.distinct('department');
+        const uniqueCategories = await collection.distinct('category');
+
+        // Fetch all questions
         const questions = await collection.find().toArray();
-        const response = questions.map(doc => {
-            return {
-                id: doc._id,
-                questions: doc.question,
-                answer: doc.answer,
-                department: doc.department,
-                category: doc.category,
-            }
-        });
+
+        // Prepare the response
+        const response = {
+            questions: questions.map(doc => {
+                return {
+                    id: doc._id,
+                    question: doc.question,
+                    answer: doc.answer,
+                    department: doc.department,
+                    category: doc.category,
+                }
+            }),
+            departments: uniqueDepartments,
+            categories: uniqueCategories,
+        };
+
         res.json(response);
     } catch (err) {
         console.log(err.stack);
@@ -152,7 +167,8 @@ exports.chatbotqaUpdateSource = async function(req, res) {
     } finally {
         await client.close();
     }
- }
+}
+
 
  exports.initMongoDbQNA = async function(req, res) {
     const client = new MongoClient(url);
