@@ -81,6 +81,42 @@ paths:
                     type: string
 
 
+  /qna/unansweredquestions/init:
+    post:
+      summary: Initialize MongoDB with unanswered QnA data (should be executed only one time at the beginning)
+      tags: 
+      - Configuration  # Updated tag for initialization under the 'Configuration' section
+      security:
+      - BearerAuth: [] 
+      responses:
+        '200':
+          description: MongoDB has been successfully initialized unanswered questions
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:   # The structure of QnA data, you need to adjust it according to your actual data structure
+                    question:
+                      type: string
+                    answer:
+                      type: string
+                    department:
+                      type: string
+                    category:
+                      type: string
+        '500':
+          description: Internal Server Error occurred while initializing MongoDB
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+
+
 
   /qna/knowledgebase:
     get:
@@ -186,3 +222,94 @@ paths:
           description: Knowledge base deployed successfully
         '500':
           description: Internal server error
+
+
+
+  /auth/unansweredquestions:
+    get:
+      summary: Retrieve all unanswered questions from the database
+      tags:
+        - unanswered QnA Language
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of the QnA list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The unique ID of the unanswered QnA item
+                    question:
+                      type: string
+                      description: The unanswered question text
+                    score:
+                      type: number
+                      description: The confidence score of the unanswered question
+                    datetime:
+                      type: string
+                      format: date-time
+                      description: The time when the question was asked by the user
+        '500':
+          description: Internal Server Error occurred while retrieving the unanswered QnA list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+
+    post:
+      summary: Add a new unanswered question to the  database
+      tags:
+        - unanswered QnA Language
+      security:
+        - BearerAuth: [] 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question to be added
+                score:
+                  type: number
+                  description: The confidence score of the unanswered question
+                
+      responses:
+        '200':
+          description: unanswered Question added successfully
+        '500':
+          description: Internal server error
+
+
+    delete:
+      summary: Delete a question from the database
+      security:
+        - BearerAuth: [] 
+      tags:
+        - unanswered QnA Language
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the question to delete
+      responses:
+        '200':
+          description: Question deleted successfully or not found
+        '500':
+          description: Internal server error
+
+

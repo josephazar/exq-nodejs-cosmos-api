@@ -93,6 +93,9 @@ router.get('/protected',(req, res) => {
 }
 )
 
+// router.post('/unansweredquestions',languageController.chatbotqaAddunaswered)
+router.get('/unansweredquestions',languageController.getUNQNA)
+router.delete('/unansweredquestions/:id',isAdmin, languageController.chatbotunqaDelete);
 
 
 

@@ -184,13 +184,7 @@ exports.getQNA = async function(req, res) {
         console.log("Inserted documents into the collection");
 
        
-        const unansweredCollection = db.collection('unansweredquestions');
-        console.log(`Connected correctly to collection ${unansweredCollection.collectionName}`);
-        const existingUnansweredCollectionCount = await unansweredCollection.countDocuments();
-        if (existingUnansweredCollectionCount === 0) {
-            console.log("Creating 'unansweredquestions' collection");
-            await unansweredCollection.createIndex({ question: 1 }, { unique: true });
-        }
+
 
 
 
@@ -299,3 +293,143 @@ exports.getQNA = async function(req, res) {
         await client.close();
     }
 };
+
+
+
+exports.chatbotqaAddunaswered = async function(req, res, next) {
+    const client = new MongoClient(url);
+    try {
+        // Get the question, answer, and department from the request body
+        const question = req.body.question;
+        const datetime = new Date();
+        const score = req.body.score;
+
+        // Access the required database and collection
+        const db = client.db(dbname);
+        const collection = db.collection("unansweredquestions");
+
+        // Insert the new document
+        const result = await collection.insertOne({
+            question: question,
+            datetime: datetime,
+            score: score,
+            
+        });
+      res.status(200).json({ message: " unanswered Question added successfully." ,id:result.insertedId});
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: error.message });
+    } finally {
+      // Close the database connection
+      await client.close();
+  }
+}
+
+
+exports.getUNQNA = async function(req, res) {
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        const db = client.db(dbname);
+        const collection = db.collection('unansweredquestions');
+
+  
+
+        // Fetch all questions
+        const questions = await collection.find().toArray();
+
+        // Prepare the response
+        const response = {
+            questions: questions.map(doc => {
+                return {
+                    id: doc._id,
+                    question: doc.question,
+                    score:doc.score,
+                    datetime:doc.datetime
+                }
+            }),
+          
+        };
+
+        res.json(response);
+    } catch (err) {
+        console.log(err.stack);
+        res.status(500).json("Internal Server Error");
+    } finally {
+        await client.close();
+    }
+}
+
+
+        // const unansweredCollection = db.collection('unansweredquestions');
+        // console.log(`Connected correctly to collection ${unansweredCollection.collectionName}`);
+        // const existingUnansweredCollectionCount = await unansweredCollection.countDocuments();
+        // if (existingUnansweredCollectionCount === 0) {
+        //     console.log("Creating 'unansweredquestions' collection");
+        //     await unansweredCollection.createIndex({ question: 1 }, { unique: true });
+        // }
+
+
+        exports.initMongoDbUNQNA = async function(req, res) {
+            const client = new MongoClient(url);
+            try {
+                await client.connect();
+                console.log("Connected correctly to server")
+                const db = client.db(dbname);
+                console.log(`Connected correctly to database ${db.databaseName}`)
+                const unansweredCollection = db.collection('unansweredquestions');
+                console.log(`Connected correctly to collection ${unansweredCollection.collectionName}`);
+                const existingUnansweredCollectionCount = await unansweredCollection.countDocuments();
+                if (existingUnansweredCollectionCount === 0) {
+                    console.log("Creating 'unansweredquestions' collection");
+                    await unansweredCollection.createIndex({ question: 1 }, { unique: true });
+                }
+        
+               
+        
+        
+        
+        
+                
+                res.json("MongoDB has been successfully initialized unanswered questions");
+            } catch (err) {
+                console.log(err.stack);
+                res.status(500).json("Internal Server Error");
+            } finally {
+                await client.close();
+            }
+         }
+
+
+
+         exports.chatbotunqaDelete = async (req, res) => { 
+            const client = new MongoClient(url);
+            try {
+                // Extract ID from request body
+                const id = req.params.id;
+                if (!id) {
+                    res.status(400).json({ message: "ID is required" });
+                    return;
+                }
+                console.log(id);
+                // Connect to the database
+                await client.connect();
+                // Access the required database and collection
+                const db = client.db(dbname);
+                const collection = db.collection("unansweredquestions");
+                // Delete the document with the specified ID
+                const result = await collection.deleteOne({ _id: new ObjectId(id) });
+                // Check if a document was actually deleted
+                if (result.deletedCount === 1) {
+                    res.json({ success: true, message: 'Document successfully deleted!' });
+                } else {
+                    res.json({ success: false, message: 'No document found with the provided ID.' });
+                }
+            } catch (err) {
+              console.log(err);
+              res.json({ success: false });
+            } finally {
+              // Close the database connection
+              await client.close();
+            }
+         }
