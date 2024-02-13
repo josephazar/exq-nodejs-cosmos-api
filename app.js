@@ -38,7 +38,7 @@ app.use(express.static(__dirname + '/dist/app'));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/dist/app/index.html');
-  // console.log(__dirname + '/dist/test-angular/browser/index.html')
+
 });
 //////////////////////added for angular
 
