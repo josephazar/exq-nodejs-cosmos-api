@@ -198,6 +198,43 @@ exports.getQNA = async function(req, res) {
     }
  }
 
+
+
+
+ exports.resetMongoDbQNA = async function(req, res) {
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        console.log("Connected correctly to server")
+        const db = client.db(dbname);
+        console.log(`Connected correctly to database ${db.databaseName}`)
+        
+        const collectionName = 'questionsanswers';
+        const collection = db.collection(collectionName);
+
+        // Check if the collection exists and drop it if it does
+        const collectionExists = await db.listCollections({ name: collectionName }).hasNext();
+        if (collectionExists) {
+            await collection.drop();
+            console.log(`Dropped collection ${collectionName}`);
+        }
+
+        console.log(`Connected correctly to collection ${collection.collectionName}`);
+        
+        const documents = JSON.parse(fs.readFileSync('./data/kb_init.json', 'utf8'));
+        await collection.insertMany(documents);
+        console.log("Inserted documents into the collection");
+
+        const questions = await collection.find().toArray();
+        res.json(questions);
+    } catch (err) {
+        console.log(err.stack);
+        res.status(500).json("Internal Server Error");
+    } finally {
+        await client.close();
+    }
+}
+
  exports.getQnAHtml = async function(req, res) {
     req.setTimeout(600000); // 10 minutes
     const client = new MongoClient(url);

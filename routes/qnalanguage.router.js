@@ -11,6 +11,7 @@ router.post('/knowledgebase', requireAuth, languageController.chatbotqaAdd);
 router.delete('/knowledgebase/:id', requireAuth, languageController.chatbotqaDelete);
 router.post('/knowledgebase/deploy', requireAuth, languageController.chatbotqaUpdateSource);
 router.post('/init', requireAuth, languageController.initMongoDbQNA);
+router.post('/initqna',requireAuth,languageController.resetMongoDbQNA)
 router.post('/unansweredquestions/init',requireAuth,languageController.initMongoDbUNQNA)
 router.post('/unansweredquestions',requireAuth,languageController.chatbotqaAddunaswered)
 module.exports = router;
