@@ -170,7 +170,7 @@ exports.getQNA = async function(req, res) {
 }
 
 
- exports.initMongoDbQNA = async function(req, res) {
+ exports.initMongoDbQNAdeprecated = async function(req, res) {
     const client = new MongoClient(url);
     try {
         await client.connect();
@@ -201,24 +201,20 @@ exports.getQNA = async function(req, res) {
 
 
 
- exports.resetMongoDbQNA = async function(req, res) {
+ exports.initMongoDbQNA = async function(req, res) {
     const client = new MongoClient(url);
     try {
         await client.connect();
         console.log("Connected correctly to server")
         const db = client.db(dbname);
         console.log(`Connected correctly to database ${db.databaseName}`)
-        
         const collectionName = 'questionsanswers';
         const collection = db.collection(collectionName);
-
-        // Check if the collection exists and drop it if it does
         const collectionExists = await db.listCollections({ name: collectionName }).hasNext();
         if (collectionExists) {
             await collection.drop();
             console.log(`Dropped collection ${collectionName}`);
         }
-
         console.log(`Connected correctly to collection ${collection.collectionName}`);
         
         const documents = JSON.parse(fs.readFileSync('./data/kb_init.json', 'utf8'));
