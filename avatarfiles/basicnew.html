@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Talking Avatar Service Demo</title>
+    <link href="./css/styles.css" rel="stylesheet">
+
+
+    <style>
+        /* General dropdown styling */
+    #languageDropdown {
+        padding: 8px 16px; /* Adjust padding to change the size */
+        background-color: #015aff; /* Light grey background */
+        border: 1px solid #022abc; /* Light grey border */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 16px; /* Text size */
+        color: #ffffff; /* Text color */
+        cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+        -webkit-appearance: none; /* Remove default styling on WebKit browsers */
+        -moz-appearance: none; /* Remove default styling on Mozilla browsers */
+        appearance: none; /* Standard way to remove default styling */
+        margin: 0; /* Remove any default margin */
+        width: auto; /* Set to auto or specify width */
+        outline: none; /* Remove the outline */
+        transition: all 0.3s ease; /* Smooth transition for changes */
+    }
+    
+    /* Dropdown hover effect */
+    #languageDropdown:hover {
+        background-color: #003cb3; /* Slightly darker background on hover */
+    }
+    
+    /* Adding a custom arrow to the dropdown */
+    #languageDropdown {
+        background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* SVG arrow icon */
+        background-repeat: no-repeat; /* No repeat for the background image */
+        background-position: right 8px center; /* Position the arrow icon */
+        background-size: 12px; /* Size of the arrow icon */
+    }
+    
+    /* Style focus state for accessibility */
+    #languageDropdown:focus {
+        border-color: #66afe9; /* Blue border for focus */
+        box-shadow: 0 0 0 3px rgba(102,175,233,.5); /* Glowing effect for focus */
+    }
+    
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body style="background-image: url('background.png'); background-repeat: no-repeat; background-size: cover;">
+
+<!-- This is the centered-container div that will hold the avatar video and center it at the top -->
+<div class="centered-container">
+    <div id="videoContainer" style="position: relative; width: 960px;">
+        <div id="overlayArea" style="position: absolute;" hidden="hidden">
+            <p id="overlayText" style="font-size: large;">Live Video</p>
+        </div>
+        <div id="remoteVideo">
+            <video autoplay playsinline>
+                <!-- Your video source here -->
+            </video>
+        </div>      
+        <canvas id="canvas" width="1920" height="1080" style="background-color: transparent;" hidden="hidden"></canvas>
+        <canvas id="tmpCanvas" width="1920" height="1080" hidden="hidden"></canvas>
+    </div>
+</div>
+
+<!-- Container for buttons, centered underneath the avatar -->
+<div class="buttons-container">
+    <button id="startSession" onclick="window.startSession()">Connect</button>
+    <button id="voice-typing-button">Voice Typing</button>
+    <button id="getOpenAIResponse" onclick="speakAndFetchResponse()">Let's Chat</button>
+    <select id="languageDropdown" onchange="changeLanguage()">
+        <option value="English">English</option>
+        <option value="Arabic">Arabic</option>
+    </select>
+</div>
+
+<!-- Container for the OpenAI query input -->
+<div class="input-container">
+    <textarea id="openAIQuery" class="input-style" onfocus="clearDefaultText(this)">am a helpful assistant... please ask your questions?</textarea>
+</div>
+
+<!-- Section to display OpenAI's response -->
+<div class="response-container">
+    <div id="openAIResponse" class="response-style"></div>
+</div>
+
+<div class="logging-container" style="padding-top: 10px; padding-bottom: 10px;">
+    <div id="logging"></div>
+</div>
+
+<div id="status"></div>
+
+<script>
+    // Adjusted function to use new input fields
+    function handleOpenAIQuery() {
+        const userQuery = document.getElementById('openAIQuery').value;
+
+        // Call the OpenAI API with the user's query
+        fetchOpenAIResponse(userQuery)
+            .then((response) => {
+                // Display the OpenAI response
+                const openAIResponseElement = document.getElementById('openAIResponse');
+                openAIResponseElement.innerText = response;
+            })
+            .catch((error) => {
+                console.error('Error fetching OpenAI response:', error);
+            });
+    }
+</script>
+
+
+
+<script>
+    // Function to convert URLs in text to clickable links
+    function linkify(text) {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function(url) {
+            return `<a href="${url}" target="_blank">${url}</a>`; // This opens links in a new tab
+        });
+    }
+
+    if ('webkitSpeechRecognition' in window) {
+    var recognition = new webkitSpeechRecognition();
+    recognition.continuous = false; // Recognition stops when the user stops speaking
+    recognition.interimResults = true; // Show interim results
+    recognition.lang = 'en-US'; // Set the language of the recognition
+
+    let isVoiceTypingActive = false;
+    let responseCalled = false; // Flag to track if speakAndFetchResponse has been called
+
+    recognition.onresult = function(event) {
+        var final_transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                final_transcript += event.results[i][0].transcript;
+            }
+        }
+        // Update the openAIQuery textarea with the result
+        document.getElementById('openAIQuery').value = final_transcript;
+        if (final_transcript.length > 0 && !responseCalled) {
+            // Call speakAndFetchResponse() here to ensure it's triggered right after receiving the final transcript
+            speakAndFetchResponse();
+            responseCalled = true; // Prevent multiple calls
+        }
+        console.log("f")
+    };
+
+    document.getElementById('voice-typing-button').addEventListener('mousedown', function() {
+        recognition.start();
+        isVoiceTypingActive = true;
+        responseCalled = false; // Reset the flag when a new session starts
+    });
+    
+    document.getElementById('voice-typing-button').addEventListener('mouseup', function() {
+        recognition.stop();
+        // No need to directly call speakAndFetchResponse() here since it's handled in onresult
+    });
+} else {
+    alert("Web Speech API is not supported in this browser.");
+}
+
+</script>
+
+<script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<script src="./basic.js"></script>
+
+ <!-- <script>
+    setTimeout(function() {
+        console.log("timeout")
+        window.startSession();
+    }, 6000);
+</script>  -->
+
+</body>
+</html>

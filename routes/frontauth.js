@@ -6,6 +6,9 @@ var tokenValidationCache = new Map();
 const azureConfig=require('../azure.conf.json')
 const passport = require('passport');
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
+var path = require('path');
+
+
 
 
 
@@ -78,7 +81,12 @@ router.use(passport.authenticate('oauth-bearer', { session: false }), (req, res,
     return next();
 });
 
+router.use(express.static(path.join(__dirname, '..', 'avatarfiles')));
 
+
+router.get('/avatar', function(req, res) {
+    res.sendFile(path.join(__dirname, '..', 'avatarfiles', 'basicnew.html'));
+});
 router.get('/source', languageController.getQnAHtml);
 router.post('/knowledgebase',isAdmin, languageController.chatbotqaAdd);
 router.delete('/knowledgebase/:id',isAdmin, languageController.chatbotqaDelete);
