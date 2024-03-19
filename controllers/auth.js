@@ -1,6 +1,7 @@
 const axios =require("axios")
 async function auth(){
     try {
+      console.trace("Auth function is called");
         const tokenUrl = `https://login.microsoftonline.com/${process.env.tenant_id}/oauth2/token`;
         console.log(tokenUrl)
         const payload =  {'tenant_id': process.env.tenant_id,

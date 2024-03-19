@@ -4,7 +4,7 @@ const axios =require("axios")
 const router = require('express').Router();
 const {main,report,reportAllRooms}=require('../controllers/gpt')
 const {findRooms,outputstring,AvailableRoom,roomReport,roomReportTemp,AvailableRoomTemp,roomsReport}=require('../controllers/rooms')
-const auth=require('../controllers/auth');
+// const auth=require('../controllers/auth');
 const { json } = require("express");
 
 

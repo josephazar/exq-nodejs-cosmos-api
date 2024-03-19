@@ -11,7 +11,7 @@ require('dotenv').config();
 
 //var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
-const botRouter = require('./routes/bot');
+// const botRouter = require('./routes/bot');
 var qnaRouter = require('./routes/qnalanguage.router');
 var frontrouter=require('./routes/frontauth')
 const swaggerDocument = YAML.load('./swagger-doc.yml');
@@ -47,7 +47,7 @@ app.get('/', function(req, res) {
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use("/api/v1/qna",qnaRouter)
-app.use("/api/v1/bot",botRouter)
+// app.use("/api/v1/bot",botRouter)
 app.use("/api/v1/auth",frontrouter)
 // Use Swagger with your Express App
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -58,15 +58,36 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.status(404).json({message: "Not Found"});
+// });
+
+
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Check if the route is one of the specified paths
+  const allowedPaths = ['/', '/questions', '/unaswered'];
+  if (allowedPaths.includes(req.path)) {
+    // Serve the index.html file for Angular to handle the route
+    return res.sendFile(path.join(__dirname, 'dist/app/index.html'));
+  }
+
+  // Original error handling logic for other routes
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Render the error page with status code 404
   res.status(err.status || 500);
   res.status(404).json({message: "Not Found"});
 });
+
+
+
 const port=8000
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

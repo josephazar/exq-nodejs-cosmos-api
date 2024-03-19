@@ -4,7 +4,7 @@ async function findRooms(){
     const url="https://graph.microsoft.com/beta/users/marwan.samrout@exquitech.com/findRooms";
             
             token= await auth()
-            
+            console.log("roooms")
             const response=await axios.get(url,{
                 headers: {
                     'Authorization': token,
