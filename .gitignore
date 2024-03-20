@@ -42,8 +42,8 @@ notes.txt
 comments.txt
 secret.js
 ./secret.js
-
-
+.github/
+.github/workflows/
 
 dist2/
 dist3/
