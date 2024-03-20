@@ -1,8 +1,8 @@
 {
   "credentials": {
-    "tenantID": "151a3694-1e2f-4a7f-bf26-102adc3fcc10",
-    "clientID": "b3867ad9-6844-457b-83b2-2bade94c68e4",
-    "audience": "b3867ad9-6844-457b-83b2-2bade94c68e4"
+    "tenantID": "b48b69e3-093a-4c7f-bda0-1754410624d0",
+    "clientID": "53bf63a9-c254-48dd-b6d9-94f824417a7d",
+    "audience": "53bf63a9-c254-48dd-b6d9-94f824417a7d"
   },
   "resource": {
     "scope": ["general"]
